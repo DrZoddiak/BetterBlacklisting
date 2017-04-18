@@ -2,9 +2,9 @@ plugins {
     id 'org.spongepowered.plugin' version '0.8.1'
 }
 
-group 'io.gihub.DrZoddiak.Blacklist'
+group 'io.gihub.drzoddiak.betterblacklisting'
 version '0.0.1'
-description = 'An example plugin'
+description = 'Blacklisting Made possible, but better!'
 
 
 dependencies {
