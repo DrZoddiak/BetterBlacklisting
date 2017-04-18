@@ -1,0 +1,13 @@
+plugins {
+    id 'org.spongepowered.plugin' version '0.8.1'
+}
+
+group 'io.gihub.DrZoddiak.Blacklist'
+version '0.0.1'
+description = 'An example plugin'
+
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:5.1.0'
+}
+
