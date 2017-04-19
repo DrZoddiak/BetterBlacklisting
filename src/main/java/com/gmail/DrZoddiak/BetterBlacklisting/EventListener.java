@@ -1,6 +1,6 @@
-package io.drzoddiak.betterblacklisting;
+package com.gmail.DrZoddiak.BetterBlacklisting;
 
-#Import sponge api
+//Import sponge api
  
- #check for:
- #Right/left click, crafting, drop
+ //#check for:
+ //#Right/left click, crafting, drop  

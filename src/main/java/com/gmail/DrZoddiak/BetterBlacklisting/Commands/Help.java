@@ -1,7 +1,7 @@
-package io.drzoddiak.betterblacklisting.Commands;
+package com.gmail.DrZoddiak.BetterBlacklisting.Commands;
 
-import io.drzoddiak.betterblacklisting.Main;
-import io.drzoddiak.betterblacklisting.Permissions;
+//import io.drzoddiak.betterblacklisting.Main;
+//import io.drzoddiak.betterblacklisting.Permissions;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.command.CommandException;
@@ -15,3 +15,13 @@ import org.spongepowered.api.text.Text;
 import java.util.ArrayList;
 import java.util.List;
 
+public class Help implements CommandExecutor
+{ 
+	@Override
+	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
