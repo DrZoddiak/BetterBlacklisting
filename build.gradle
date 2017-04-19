@@ -2,7 +2,7 @@ plugins {
     id 'org.spongepowered.plugin' version '0.8.1'
 }
 
-group 'io.gihub.drzoddiak.betterblacklisting'
+group 'com.gmail.drzoddiak.betterblacklisting'
 version '0.0.1'
 description = 'Blacklisting Made possible, but better!'
 
