@@ -9,7 +9,7 @@ import org.spongepowered.api.entity.living.player.Player;
 
 //#Idealy the command structure should resemble /bbl set (itemID) true
 //#and/or resemble /bbl set true | This of course detecting the item in hand.
-public class Set implements CommandExecutor
+public class Add implements CommandExecutor
 {
 
 	@Override

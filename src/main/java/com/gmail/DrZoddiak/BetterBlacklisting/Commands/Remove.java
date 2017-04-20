@@ -6,7 +6,7 @@ import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
 import org.spongepowered.api.entity.living.player.Player; 
-public class Delete implements CommandExecutor
+public class Remove implements CommandExecutor
 {
 
 	@Override

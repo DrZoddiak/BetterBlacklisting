@@ -43,6 +43,7 @@ public class Main
 	Game game;   
 	
 	private ConfigurationNode config;
+	String[] banned;
 	
 	@Listener
 	public	void onPreInit(GamePreInitializationEvent event)
@@ -54,6 +55,10 @@ public class Main
 			if(!defaultConfig.toFile().exists())
 			{
 				loader.save(config);
+			}
+			else
+			{
+				
 			}
 		}
 		catch (IOException e)
@@ -71,16 +76,16 @@ public class Main
 	private void commandLoad()
 	{
 
-		CommandSpec set = CommandSpec.builder()
-				.description(Text.of("Adds item to banned item list")).executor(new Set()).permission(Permissions.ADD_ITEM).build();
-		CommandSpec delete = CommandSpec.builder()
-				.description(Text.of("Deletes item from banned item list")).executor(new Delete()).permission(Permissions.DELETE_ITEM).build();
+		CommandSpec add = CommandSpec.builder()
+				.description(Text.of("Adds item to banned item list")).executor(new Add()).permission(Permissions.ADD_ITEM).build();
+		CommandSpec remove = CommandSpec.builder()
+				.description(Text.of("Deletes item from banned item list")).executor(new Remove()).permission(Permissions.DELETE_ITEM).build();
 		//Base Command for above commands, as commands are added, create additional children
 		CommandSpec bbl = CommandSpec.builder()
-				.description(Text.of("Base command")).executor(new Help()).child(set, "add").child(set, "delete").build();
+				.description(Text.of("Base command")).executor(new Help()).child(add, "add").child(remove, "remove").build();
 
-		game.getCommandManager().register(this, set, "bbl set");
-		game.getCommandManager().register(this, delete, "bbl delete");
+		game.getCommandManager().register(this, add, "bbl add");
+		game.getCommandManager().register(this, remove, "bbl remove");
 		game.getCommandManager().register(this, bbl, "bbl help");
 	}
 
