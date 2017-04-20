@@ -13,9 +13,8 @@ import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.text.Text;
 
-import com.gmail.DrZoddiak.BetterBlacklisting.Commands.Delete;
-import com.gmail.DrZoddiak.BetterBlacklisting.Commands.Help;
-import com.gmail.DrZoddiak.BetterBlacklisting.Commands.Set;
+import com.gmail.DrZoddiak.BetterBlacklisting.Commands.*;
+
 import com.google.inject.Inject;
 
 import ninja.leaping.configurate.ConfigurationNode;
@@ -48,30 +47,41 @@ public class Main
 	@Listener
 	public	void onPreInit(GamePreInitializationEvent event)
 	{
-		try 
+		try
 		{
 			config = loader.load();
-			
+
 			if(!defaultConfig.toFile().exists())
-			{ 
+			{
 				loader.save(config);
 			}
 		}
 		catch (IOException e)
-		{ 
+		{
 			logger.warning("File not found!");
 		}
 	}
 	
 	@Listener
-	public void onInit(GameInitializationEvent event)   
+	public void Init(GameInitializationEvent event)
 	{  
-		 CommandSpec bbSet = CommandSpec.builder().description(Text.of("bbSet")).permission("bbl.set").executor(new Set()).build();
-		 CommandSpec bbHelp = CommandSpec.builder().description(Text.of("bbHelp")).permission("bbl.help").executor(new Help()).build();
-		 CommandSpec bbDelete = CommandSpec.builder().description(Text.of("bbDelete")).permission("bbl.delete").executor(new Delete()).build();
-		 
-		 game.getCommandManager().register(this, bbSet, "bbSet");
-		 game.getCommandManager().register(this, bbHelp, "bbHelp");
-		 game.getCommandManager().register(this, bbDelete, "bbDelete");  
+		commandLoad();
 	}
+
+	private void commandLoad()
+	{
+
+		CommandSpec set = CommandSpec.builder()
+				.description(Text.of("Adds item to banned item list")).executor(new Set()).permission(Permissions.Add_Item).build();
+		CommandSpec delete = CommandSpec.builder()
+				.description(Text.of("Deletes item from banned item list")).executor(new Delete()).permission(Permissions.Delete_Item).build();
+		//Base Command for above commands, as commands are added, create additional children
+		CommandSpec bbl = CommandSpec.builder()
+				.description(Text.of("Base command")).executor(new Help()).child(set, "add").child(set, "delete").build();
+
+		game.getCommandManager().register(this, set, "bblSet");
+		game.getCommandManager().register(this, delete, "bblDelete");
+		game.getCommandManager().register(this, bbl, "bblHelp");
+	}
+
 }
