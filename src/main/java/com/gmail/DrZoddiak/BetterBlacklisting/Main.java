@@ -72,16 +72,16 @@ public class Main
 	{
 
 		CommandSpec set = CommandSpec.builder()
-				.description(Text.of("Adds item to banned item list")).executor(new Set()).permission(Permissions.Add_Item).build();
+				.description(Text.of("Adds item to banned item list")).executor(new Set()).permission(Permissions.ADD_ITEM).build();
 		CommandSpec delete = CommandSpec.builder()
-				.description(Text.of("Deletes item from banned item list")).executor(new Delete()).permission(Permissions.Delete_Item).build();
+				.description(Text.of("Deletes item from banned item list")).executor(new Delete()).permission(Permissions.DELETE_ITEM).build();
 		//Base Command for above commands, as commands are added, create additional children
 		CommandSpec bbl = CommandSpec.builder()
 				.description(Text.of("Base command")).executor(new Help()).child(set, "add").child(set, "delete").build();
 
-		game.getCommandManager().register(this, set, "bblSet");
-		game.getCommandManager().register(this, delete, "bblDelete");
-		game.getCommandManager().register(this, bbl, "bblHelp");
+		game.getCommandManager().register(this, set, "bbl set");
+		game.getCommandManager().register(this, delete, "bbl delete");
+		game.getCommandManager().register(this, bbl, "bbl help");
 	}
 
 }
