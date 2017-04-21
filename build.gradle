@@ -3,11 +3,10 @@ plugins {
 }
 
 group = 'com.gmail.drzoddiak.betterblacklisting'
-version ='1.0'
+version ='0.2.0'
 description = 'Blacklisting Made possible, but better!'
 
 
 dependencies {
     compile 'org.spongepowered:spongeapi:5.1.0'
 }
-

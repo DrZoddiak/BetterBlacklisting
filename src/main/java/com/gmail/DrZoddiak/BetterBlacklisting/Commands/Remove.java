@@ -1,11 +1,12 @@
 package com.gmail.DrZoddiak.BetterBlacklisting.Commands;  
 
+import com.gmail.DrZoddiak.BetterBlacklisting.Permissions;
+
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
 import org.spongepowered.api.command.args.CommandContext;
 import org.spongepowered.api.command.spec.CommandExecutor;
-import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 
@@ -17,7 +18,7 @@ public class Remove implements CommandExecutor
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException 
 	{ 
 		String itemID = args.getOne("id").get().toString();
-		if(src instanceof Player)
+		if(src.hasPermission(Permissions.REMOVE_ITEM))
 		{ 
 				if(Main.banned.contains(itemID)) 
 				{
@@ -28,6 +29,10 @@ public class Remove implements CommandExecutor
 				{
 					src.sendMessage(Text.of(TextColors.RED,"This is not blacklisted!"));
 				}
+		}
+		else
+		{
+			src.sendMessage(Text.of(TextColors.RED,"You do not have permission to use this command!"));
 		}
 		return CommandResult.success();
 	} 
