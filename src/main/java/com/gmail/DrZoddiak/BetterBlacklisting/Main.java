@@ -1,21 +1,22 @@
 package com.gmail.DrZoddiak.BetterBlacklisting;
 
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+
+import com.gmail.DrZoddiak.BetterBlacklisting.Commands.CommandLoader;
 
 import org.spongepowered.api.Game;
-import org.spongepowered.api.command.args.GenericArguments;
-import org.spongepowered.api.command.spec.CommandSpec;
+import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.Plugin;
-import org.spongepowered.api.text.Text;
-
-import com.gmail.DrZoddiak.BetterBlacklisting.Commands.*;
 
 import com.google.inject.Inject;
 
@@ -23,73 +24,71 @@ import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
-@Plugin(id = "betterblacklisting", name = "BetterBlacklisting", version = "1.0")
+
+
+@Plugin(id = "betterblacklisting", name = "BetterBlacklisting",
+		version = "0.2.0",
+		description = "A betterblacklisting plugin",
+		authors = {"DrZoddiak & burpingdog1"})
+
 public class Main
 {
 	@Inject
 	@DefaultConfig(sharedRoot = true)
 	private Path defaultConfig;
-	
+
 	@Inject
 	@DefaultConfig(sharedRoot = true)
 	private ConfigurationLoader<CommentedConfigurationNode> loader;
-	
+
 	@Inject
 	@DefaultConfig(sharedRoot = true)
-	private Path configDir; 
-	
+	private Path configDir;
+
+	@Inject
+	Game game;
+
+	private ConfigurationNode config;
+
+	public static ArrayList<String> banned = new ArrayList<>();
+
 	@Inject
 	private Logger logger;
-	
-	@Inject
-	Game game;   
-	
-	private ConfigurationNode config;
-	public static ArrayList<String> banned = new ArrayList<String>();
-	
+
+	public Logger getLogger() {
+		return logger;
+	}
+
 	@Listener
-	public	void onPreInit(GamePreInitializationEvent event)
+	public void onPreInit(GamePreInitializationEvent event)
 	{
-		try
-		{
+		getLogger().info(String.format("betterblacklisting - Version:0.2.1 - Initializing..."));
+
+		try {
 			config = loader.load();
 
-			if(!defaultConfig.toFile().exists())
-			{
+			if (!defaultConfig.toFile().exists()) {
+				loader.save(config);
+			} else {
 				loader.save(config);
 			}
-			else
-			{  
-			}
-		}
-		catch (IOException e)
-		{
-			logger.warning("File not found!");
+		} catch (IOException e) {
+			logger.warn("File not found!");
 		}
 	}
-	
+
 	@Listener
-	public void Init(GameInitializationEvent event)
-	{  
-		commandLoad();
+	public void onInit(GameInitializationEvent event)
+	{
+		Sponge.getCommandManager().register(this, new CommandLoader().bbl, "BetterBlacklisting","bbl");
+		getLogger().info(String.format("Initialized! - Your glorified stop sign has been delivered!"));
 	}
 
-	private void commandLoad()
+	@Listener
+	public void gameStop(GameStoppingServerEvent event)
 	{
-
-		CommandSpec add = CommandSpec.builder()
-				.description(Text.of("Adds item to banned item list")).executor(new Add())
-				.arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("id")))).permission(Permissions.ADD_ITEM).build();
-		CommandSpec remove = CommandSpec.builder()
-				.description(Text.of("Deletes item from banned item list")).executor(new Remove())
-				.arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("id")))).permission(Permissions.DELETE_ITEM).build();
-		//Base Command for above commands, as commands are added, create additional children
-		CommandSpec bbl = CommandSpec.builder()
-				.description(Text.of("Base command")).executor(new Help()).child(add, "add").child(remove, "remove").build();
-
-		game.getCommandManager().register(this, add, "bbladd");
-		game.getCommandManager().register(this, remove, "bblremove");
-		game.getCommandManager().register(this, bbl, "bbl help");
+		getLogger().info(String.format("BetterBlacklisting - Server stopping? I guess we can too. - Saving..."));
+		//insert save for banned items
 	}
 
 }
