@@ -1,8 +1,7 @@
 package com.gmail.DrZoddiak.BetterBlacklisting.Commands;
 
 
-import com.gmail.DrZoddiak.BetterBlacklisting.Permissions;
-
+import com.gmail.DrZoddiak.BetterBlacklisting.Main;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -16,13 +15,19 @@ public class BList implements CommandExecutor
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
     {
-        if(src.hasPermission(Permissions.LIST_ITEM))
-        {
-            //We need storage before this can really be done
-        }
+        if(Main.banned.isEmpty())
+        	src.sendMessage(Text.of(TextColors.RED, "Blacklist is empty!"));
         else
         {
-            src.sendMessage(Text.of(TextColors.RED,"You do not have permission to use this command!"));
+        	String list="";
+        	for(int i=0; i<Main.banned.size();i++)
+        	{
+        		if(i==0)
+        			list = Main.banned.get(i);
+        		else
+        			list = list + ", "+ Main.banned.get(i); 
+        	} 
+        	src.sendMessage(Text.of(list));
         }
         return CommandResult.success();
     }

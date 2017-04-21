@@ -29,7 +29,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 @Plugin(id = "betterblacklisting", name = "BetterBlacklisting",
 		version = "0.2.0",
 		description = "A betterblacklisting plugin",
-		authors = {"DrZoddiak & burpingdog1"})
+		authors = {"DrZoddiak & Burpingdog1"})
 
 public class Main
 {
@@ -55,7 +55,8 @@ public class Main
 	@Inject
 	private Logger logger;
 
-	public Logger getLogger() {
+	public Logger getLogger()
+	{
 		return logger;
 	}
 
@@ -64,15 +65,17 @@ public class Main
 	{
 		getLogger().info(String.format("betterblacklisting - Version:0.2.1 - Initializing..."));
 
-		try {
+		try 
+		{
 			config = loader.load();
 
-			if (!defaultConfig.toFile().exists()) {
+			if (!defaultConfig.toFile().exists()) 
+			{
 				loader.save(config);
-			} else {
-				loader.save(config);
-			}
-		} catch (IOException e) {
+			} 
+		}
+		catch (IOException e) 
+		{
 			logger.warn("File not found!");
 		}
 	}

@@ -2,8 +2,6 @@ package com.gmail.DrZoddiak.BetterBlacklisting.Commands;
 
 import java.util.List;
 
-import com.gmail.DrZoddiak.BetterBlacklisting.Permissions;
-
 import com.google.common.collect.Lists;
 
 import org.spongepowered.api.command.CommandException;
@@ -22,25 +20,15 @@ public class Help implements CommandExecutor
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
 	{
-		List<Text> helpText = Lists.newArrayList();
-
-		if(src.hasPermission(Permissions.HELP_BASE))
-		{
-
+		List<Text> helpText = Lists.newArrayList(); 
 			helpText.add(Text.of(TextColors.GREEN, Text.builder("/bbl add").onClick(TextActions.suggestCommand("/bbl add modID:itemID")),TextColors.GRAY," modID:itemID",TextColors.DARK_GRAY," - ",TextColors.DARK_AQUA,"Is used to add items to banned item list"));
 			helpText.add(Text.of(TextColors.GREEN, Text.builder("/bbl remove").onClick(TextActions.suggestCommand("/bbl remove modID:itemID")),TextColors.GRAY," modID:itemID",TextColors.DARK_GRAY," - ",TextColors.DARK_AQUA,"Is used to add items to banned item list"));
+			helpText.add(Text.of(TextColors.GREEN, Text.builder("/bbl reload").onClick(TextActions.runCommand("/bbl reload")),TextColors.DARK_GRAY," - ",TextColors.DARK_AQUA,"Reloads files"));
 			helpText.add(Text.of(TextColors.GREEN, Text.builder("/bbl list").onClick(TextActions.runCommand("/bbl list")),TextColors.DARK_GRAY," - ",TextColors.DARK_AQUA,"Shows items that are currently on the banned item list"));
 
 			PaginationList.builder()
-					.title(Text.of(TextColors.GREEN, " BetterBlacklisting Help")).padding(Text.of(TextColors.YELLOW, "#")).contents(helpText).sendTo(src);
-
-		}
-
-		else
-		{
-			src.sendMessage(Text.of(TextColors.RED,"You do not have permission to use this command!"));
-		}
-
+					.title(Text.of(TextColors.GREEN, " BetterBlacklisting Help")).padding(Text.of(TextColors.YELLOW, "=")).contents(helpText).sendTo(src);
+ 
 		return CommandResult.success();
 
 	}

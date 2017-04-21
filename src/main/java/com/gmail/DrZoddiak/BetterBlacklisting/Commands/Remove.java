@@ -1,7 +1,5 @@
 package com.gmail.DrZoddiak.BetterBlacklisting.Commands;  
 
-import com.gmail.DrZoddiak.BetterBlacklisting.Permissions;
-
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -17,9 +15,7 @@ public class Remove implements CommandExecutor
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException 
 	{ 
-		String itemID = args.getOne("id").get().toString();
-		if(src.hasPermission(Permissions.REMOVE_ITEM))
-		{ 
+		String itemID = args.getOne("id").get().toString(); 
 				if(Main.banned.contains(itemID)) 
 				{
 					Main.banned.remove(itemID);
@@ -28,12 +24,7 @@ public class Remove implements CommandExecutor
 				else
 				{
 					src.sendMessage(Text.of(TextColors.RED,"This is not blacklisted!"));
-				}
-		}
-		else
-		{
-			src.sendMessage(Text.of(TextColors.RED,"You do not have permission to use this command!"));
-		}
+				} 
 		return CommandResult.success();
 	} 
 }
