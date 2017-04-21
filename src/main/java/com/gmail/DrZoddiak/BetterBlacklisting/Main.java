@@ -2,9 +2,11 @@ package com.gmail.DrZoddiak.BetterBlacklisting;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.spongepowered.api.Game;
+import org.spongepowered.api.command.args.GenericArguments;
 import org.spongepowered.api.command.spec.CommandSpec;
 import org.spongepowered.api.config.DefaultConfig;
 import org.spongepowered.api.event.Listener;
@@ -43,7 +45,7 @@ public class Main
 	Game game;   
 	
 	private ConfigurationNode config;
-	String[] banned;
+	public static ArrayList<String> banned = new ArrayList<String>();
 	
 	@Listener
 	public	void onPreInit(GamePreInitializationEvent event)
@@ -57,8 +59,7 @@ public class Main
 				loader.save(config);
 			}
 			else
-			{
-				
+			{  
 			}
 		}
 		catch (IOException e)
@@ -77,15 +78,17 @@ public class Main
 	{
 
 		CommandSpec add = CommandSpec.builder()
-				.description(Text.of("Adds item to banned item list")).executor(new Add()).permission(Permissions.ADD_ITEM).build();
+				.description(Text.of("Adds item to banned item list")).executor(new Add())
+				.arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("id")))).permission(Permissions.ADD_ITEM).build();
 		CommandSpec remove = CommandSpec.builder()
-				.description(Text.of("Deletes item from banned item list")).executor(new Remove()).permission(Permissions.DELETE_ITEM).build();
+				.description(Text.of("Deletes item from banned item list")).executor(new Remove())
+				.arguments(GenericArguments.onlyOne(GenericArguments.string(Text.of("id")))).permission(Permissions.DELETE_ITEM).build();
 		//Base Command for above commands, as commands are added, create additional children
 		CommandSpec bbl = CommandSpec.builder()
 				.description(Text.of("Base command")).executor(new Help()).child(add, "add").child(remove, "remove").build();
 
-		game.getCommandManager().register(this, add, "bbl add");
-		game.getCommandManager().register(this, remove, "bbl remove");
+		game.getCommandManager().register(this, add, "bbladd");
+		game.getCommandManager().register(this, remove, "bblremove");
 		game.getCommandManager().register(this, bbl, "bbl help");
 	}
 
