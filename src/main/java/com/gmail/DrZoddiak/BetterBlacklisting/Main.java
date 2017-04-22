@@ -34,15 +34,15 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class Main
 {
 	@Inject
-	@DefaultConfig(sharedRoot = true)
+	@DefaultConfig(sharedRoot = false)
 	private Path defaultConfig;
 
 	@Inject
-	@DefaultConfig(sharedRoot = true)
+	@DefaultConfig(sharedRoot = false)
 	private ConfigurationLoader<CommentedConfigurationNode> loader;
 
 	@Inject
-	@DefaultConfig(sharedRoot = true)
+	@DefaultConfig(sharedRoot = false)
 	private Path configDir;
 
 	@Inject
@@ -70,9 +70,13 @@ public class Main
 			config = loader.load();
 
 			if (!defaultConfig.toFile().exists()) 
-			{
+			{  
 				loader.save(config);
+				
 			} 
+			else
+			{ 
+			}
 		}
 		catch (IOException e) 
 		{
@@ -91,7 +95,7 @@ public class Main
 	public void gameStop(GameStoppingServerEvent event)
 	{
 		getLogger().info(String.format("BetterBlacklisting - Server stopping? I guess we can too. - Saving..."));
-		//insert save for banned items
+		//insert save for banned items 
 	}
 
 }
