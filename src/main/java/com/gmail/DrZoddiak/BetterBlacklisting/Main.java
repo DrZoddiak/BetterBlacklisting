@@ -24,12 +24,14 @@ import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
 import ninja.leaping.configurate.loader.ConfigurationLoader;
 
+import static com.gmail.DrZoddiak.BetterBlacklisting.Repeat.*;
 
 
-@Plugin(id = "betterblacklisting", name = "BetterBlacklisting",
-		version = "0.2.0",
-		description = "A betterblacklisting plugin",
-		authors = {"DrZoddiak & Burpingdog1"})
+
+@Plugin(id = ID, name = NAME,
+		version = VERSION,
+		description = DESCRIPTION,
+		authors = {AUTHORS})
 
 public class Main
 {
@@ -63,22 +65,22 @@ public class Main
 	@Listener
 	public void onPreInit(GamePreInitializationEvent event)
 	{
-		getLogger().info(String.format("betterblacklisting - Version:0.2.1 - Initializing..."));
+		getLogger().info(String.format("%s - Version:%s - Initializing...",NAME,VERSION));
 
-		try 
+		try
 		{
 			config = loader.load();
 
-			if (!defaultConfig.toFile().exists()) 
-			{  
+			if (!defaultConfig.toFile().exists())
+			{
 				loader.save(config);
-				
-			} 
+
+			}
 			else
-			{ 
+			{
 			}
 		}
-		catch (IOException e) 
+		catch (IOException e)
 		{
 			logger.warn("File not found!");
 		}
@@ -94,8 +96,8 @@ public class Main
 	@Listener
 	public void gameStop(GameStoppingServerEvent event)
 	{
-		getLogger().info(String.format("BetterBlacklisting - Server stopping? I guess we can too. - Saving..."));
-		//insert save for banned items 
+		getLogger().info(String.format("%s - Server stopping? I guess we can too. - Saving...",NAME));
+		//insert save for banned items
 	}
 
 }
