@@ -13,27 +13,42 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 public class BBlacklist 
 {
 	private ArrayList<String> banned = new ArrayList<String>();
+	private Logger logger;
+	private ConfigurationNode config;
+	private Path defaultConfig;
+	private ConfigurationLoader<CommentedConfigurationNode> loader; 
 
 	public BBlacklist(Logger logger, ConfigurationNode config, Path defaultConfig, ConfigurationLoader<CommentedConfigurationNode> loader) 
-	{  
-		try
+	{   
+			this.config = config;
+			this.defaultConfig = defaultConfig;
+			this.loader = loader;  
+			setup();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void setup( ) 
+	{    
+		try 
 		{
-			 config = loader.load();
-
+			config = loader.load();
 			if (!defaultConfig.toFile().exists())
 			{   
-				loader.save(config);  
+				config.getNode("Banned").setValue(banned);
+				loader.save(config);   
 			}
 			else
 			{
 				//Read data and save into banned arraylist
-			}
-		}
+				banned = (ArrayList<String>) config.getNode("Banned").getValue(); 
+			} 
+		} 
 		catch (IOException e)
 		{
 			logger.warn("File not found!");
-		}
+		} 
 	}
+	
 	
 	public ArrayList<String> getList()
 	{
@@ -43,15 +58,35 @@ public class BBlacklist
 	public void add(String s)
 	{
 		banned.add(s); 
-		
-		//save change through configs
+		config.getNode("Banned").setValue(banned);
+		try 
+		{
+			loader.save(config);
+		} 
+		catch (IOException e)
+		{ 
+			e.printStackTrace();
+		} 
 	}
 	
 	public void remove(String s)
 	{
-		banned.remove(s);
-		//save change through config
-	}
+		banned.remove(s); 
+		try 
+		{
+			loader.save(config);
+		} 
+		catch (IOException e)
+		{ 
+			e.printStackTrace();
+		} 
+	} 
+	
+	public void reload()
+	{ 
+		
+	} 
+	
 }
 
 //This file is to change config item blacklist
