@@ -16,16 +16,21 @@ public class Add implements CommandExecutor
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
 	{  
 		String itemID = args.getOne("id").get().toString(); 
-		if(!Main.list.getList().contains(itemID))
-		{
-			Main.list.add(itemID);
-			src.sendMessage(Text.of(TextColors.GREEN,"Successfully added to blacklist!"));
-		}
+		 
+		if(itemID.indexOf(":") == -1)
+			src.sendMessage(Text.of(TextColors.RED, "Incorrect format!"));
 		else
-		{
-			src.sendMessage(Text.of(TextColors.RED,"This is already blacklisted!"));
-		} 
-		
+		{ 
+			if(!Main.list.getList().contains(itemID))
+			{
+				Main.list.add(itemID);
+				src.sendMessage(Text.of(TextColors.GREEN,"Successfully added ", TextColors.GRAY, itemID, TextColors.GREEN," to blacklist!"));
+			}
+			else
+			{
+				src.sendMessage(Text.of(TextColors.RED,"This is already blacklisted!"));
+			} 
+		}
 		return CommandResult.success();
 	}
 } 

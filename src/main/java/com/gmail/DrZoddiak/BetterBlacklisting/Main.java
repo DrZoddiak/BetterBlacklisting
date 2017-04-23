@@ -1,7 +1,6 @@
 package com.gmail.DrZoddiak.BetterBlacklisting;
 
-
-import java.io.IOException;
+ 
 import java.nio.file.Path;
 import org.slf4j.Logger;
 
