@@ -3,8 +3,6 @@ package com.gmail.DrZoddiak.BetterBlacklisting;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-
 import org.slf4j.Logger;
 
 import com.gmail.DrZoddiak.BetterBlacklisting.Commands.CommandLoader;
@@ -41,7 +39,7 @@ public class Main
 
 	@Inject
 	@DefaultConfig(sharedRoot = false)
-	private ConfigurationLoader<CommentedConfigurationNode> loader;
+	public static ConfigurationLoader<CommentedConfigurationNode> loader;
 
 	@Inject
 	@DefaultConfig(sharedRoot = false)
@@ -52,7 +50,7 @@ public class Main
 
 	private ConfigurationNode config;
 
-	public static ArrayList<String> banned = new ArrayList<>();
+	public static BBlacklist list;
 
 	@Inject
 	private Logger logger;
@@ -67,12 +65,13 @@ public class Main
 	{
 		getLogger().info(String.format("%s - Version:%s - Initializing...",NAME,VERSION));
 
+		list = new BBlacklist();
 		try
 		{
 			config = loader.load();
 
 			if (!defaultConfig.toFile().exists())
-			{
+			{ 
 				loader.save(config);
 
 			}

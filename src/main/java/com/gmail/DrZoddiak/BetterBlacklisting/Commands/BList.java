@@ -15,17 +15,17 @@ public class BList implements CommandExecutor
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
     {
-        if(Main.banned.isEmpty())
+        if(Main.list.getList().isEmpty())
         	src.sendMessage(Text.of(TextColors.RED, "Blacklist is empty!"));
         else
         {
         	String list="";
-        	for(int i=0; i<Main.banned.size();i++)
+        	for(int i=0; i<Main.list.getList().size();i++)
         	{
         		if(i==0)
-        			list = Main.banned.get(i);
+        			list = Main.list.getList().get(i);
         		else
-        			list = list + ", "+ Main.banned.get(i); 
+        			list = list + ", "+ Main.list.getList().get(i); 
         	} 
         	src.sendMessage(Text.of(list));
         }
