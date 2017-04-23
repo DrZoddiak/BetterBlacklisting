@@ -39,7 +39,7 @@ public class Main
 
 	@Inject
 	@DefaultConfig(sharedRoot = false)
-	public static ConfigurationLoader<CommentedConfigurationNode> loader;
+	private ConfigurationLoader<CommentedConfigurationNode> loader;
 
 	@Inject
 	@DefaultConfig(sharedRoot = false)
@@ -65,24 +65,7 @@ public class Main
 	{
 		getLogger().info(String.format("%s - Version:%s - Initializing...",NAME,VERSION));
 
-		list = new BBlacklist();
-		try
-		{
-			config = loader.load();
-
-			if (!defaultConfig.toFile().exists())
-			{ 
-				loader.save(config);
-
-			}
-			else
-			{
-			}
-		}
-		catch (IOException e)
-		{
-			logger.warn("File not found!");
-		}
+		list = new BBlacklist(logger, config, defaultConfig, loader); 
 	}
 
 	@Listener

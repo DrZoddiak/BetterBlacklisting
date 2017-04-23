@@ -16,10 +16,9 @@ public class Add implements CommandExecutor
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
 	{  
 		String itemID = args.getOne("id").get().toString(); 
-				
-		if(!Main.banned.contains(itemID))
+		if(!Main.list.getList().contains(itemID))
 		{
-			Main.banned.add(itemID);
+			Main.list.add(itemID);
 			src.sendMessage(Text.of(TextColors.GREEN,"Successfully added to blacklist!"));
 		}
 		else
