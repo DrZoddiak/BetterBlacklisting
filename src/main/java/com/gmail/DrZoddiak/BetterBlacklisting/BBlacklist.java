@@ -82,8 +82,16 @@ public class BBlacklist
 		} 
 	} 
 	
+	@SuppressWarnings("unchecked")
 	public void reload()
 	{ 
+		try {
+			config = loader.load();
+			banned = (ArrayList<String>) config.getNode("Banned").getValue(); 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	} 
 	
