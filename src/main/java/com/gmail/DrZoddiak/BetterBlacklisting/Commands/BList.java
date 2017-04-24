@@ -15,7 +15,7 @@ public class BList implements CommandExecutor
     @Override
     public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
     {
-        if(Main.list.getList().isEmpty())
+        if(Main.list.getList().isEmpty() ) 
         	src.sendMessage(Text.of(TextColors.RED, "Blacklist is empty!"));
         else
         {
@@ -27,7 +27,8 @@ public class BList implements CommandExecutor
         		else
         			list = list + ", "+ Main.list.getList().get(i); 
         	} 
-        	src.sendMessage(Text.of(list));
+        	if(!list.equals(""))
+        		src.sendMessage(Text.of(list));
         }
         return CommandResult.success();
     }

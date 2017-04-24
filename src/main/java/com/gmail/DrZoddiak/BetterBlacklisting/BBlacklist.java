@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
+import org.spongepowered.api.item.inventory.ItemStack;
 
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.commented.CommentedConfigurationNode;
@@ -12,7 +13,7 @@ import ninja.leaping.configurate.loader.ConfigurationLoader;
 
 public class BBlacklist 
 {
-	private ArrayList<String> banned = new ArrayList<String>();
+	private ArrayList<String> banned = new ArrayList<String>(); 
 	private Logger logger;
 	private ConfigurationNode config;
 	private Path defaultConfig;
@@ -53,7 +54,7 @@ public class BBlacklist
 	public ArrayList<String> getList()
 	{
 		return banned;
-	}
+	} 
 	
 	public void add(String s)
 	{
