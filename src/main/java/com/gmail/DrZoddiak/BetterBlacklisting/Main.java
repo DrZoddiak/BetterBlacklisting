@@ -72,6 +72,7 @@ public class Main
 	{
 		Sponge.getCommandManager().register(this, new CommandLoader().bbl, "BetterBlacklisting","bbl");
 		getLogger().info(String.format("Initialized! - Your glorified stop sign has been delivered!"));
+		Sponge.getEventManager().registerListeners(this, new EventListener());
 	}
 
 	@Listener
