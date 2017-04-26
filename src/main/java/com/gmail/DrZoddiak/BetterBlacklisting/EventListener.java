@@ -28,5 +28,5 @@ public class EventListener
  			} 
 		}
 		//Want to store a banned item? too bad!
-	}
+	} 
 }
