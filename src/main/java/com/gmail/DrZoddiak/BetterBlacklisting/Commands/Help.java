@@ -27,7 +27,7 @@ public class Help implements CommandExecutor
 			helpText.add(Text.of(TextColors.GREEN, Text.builder("/bbl list").onClick(TextActions.runCommand("/bbl list")),TextColors.DARK_GRAY," - ",TextColors.DARK_AQUA,"Shows items that are currently on the banned item list"));
 
 			PaginationList.builder()
-					.title(Text.of(TextColors.GREEN, "BetterBlacklisting Help")).padding(Text.of(TextColors.YELLOW, "=")).contents(helpText).sendTo(src);
+					.title(Text.of(TextColors.GREEN, " BetterBlacklisting Help")).padding(Text.of(TextColors.YELLOW, "=")).contents(helpText).sendTo(src);
  
 		return CommandResult.success();
 
