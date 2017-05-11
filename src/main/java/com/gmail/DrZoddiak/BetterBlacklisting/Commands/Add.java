@@ -12,12 +12,6 @@ import com.gmail.DrZoddiak.BetterBlacklisting.Main;
 
 public class Add implements CommandExecutor
 {
-    private final Main plugin;
-    public Add(Main plugin)
-    {
-        this.plugin = plugin;
-    }
-
 
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
