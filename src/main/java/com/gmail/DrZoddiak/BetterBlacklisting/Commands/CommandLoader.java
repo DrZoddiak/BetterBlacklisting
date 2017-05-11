@@ -10,8 +10,8 @@ public class CommandLoader
 {
 
     private CommandSpec add = CommandSpec.builder()
-        .description(Text.of("Adds item to banned item list")).executor(new Add())/*.arguments(GenericArguments.onlyOne(GenericArguments
-        .string(Text.of("id"))))*/.permission(Reference.ADD_ITEM).build();
+        .description(Text.of("Adds item to banned item list")).executor(new Add()).arguments(GenericArguments.onlyOne(GenericArguments
+        .string(Text.of("id")))).permission(Reference.ADD_ITEM).build();
 
     private CommandSpec remove = CommandSpec.builder()
         .description(Text.of("Removes item from banned item list")).executor(new Remove()).arguments(GenericArguments.onlyOne(GenericArguments
