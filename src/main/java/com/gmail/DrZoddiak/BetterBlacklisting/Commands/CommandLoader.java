@@ -8,7 +8,7 @@ import com.gmail.DrZoddiak.BetterBlacklisting.Reference;
 
 public class CommandLoader
 {
- 
+
     private CommandSpec add = CommandSpec.builder()
         .description(Text.of("Adds item to banned item list")).executor(new Add()).arguments(GenericArguments.onlyOne(GenericArguments
         .string(Text.of("id")))).permission(Reference.ADD_ITEM).build();

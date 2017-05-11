@@ -17,7 +17,7 @@ public class BBlacklist
 	private Logger logger;
 	private ConfigurationNode config;
 	private Path defaultConfig;
-	private ConfigurationLoader<CommentedConfigurationNode> loader; 
+	private ConfigurationLoader<CommentedConfigurationNode> loader;
 
 	public BBlacklist(Logger logger, ConfigurationNode config, Path defaultConfig, ConfigurationLoader<CommentedConfigurationNode> loader) 
 	{   
@@ -26,6 +26,8 @@ public class BBlacklist
 			this.loader = loader;  
 			setup();
 	}
+
+
 	
 	@SuppressWarnings("unchecked")
 	public void setup( ) 

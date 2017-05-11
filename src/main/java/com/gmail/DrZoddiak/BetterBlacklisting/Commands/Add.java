@@ -9,18 +9,20 @@ import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.format.TextColors;
 import com.gmail.DrZoddiak.BetterBlacklisting.Main;
 
+
 public class Add implements CommandExecutor
 {
 
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
-	{  
-		String itemID = args.getOne("id").get().toString(); 
-		 
-		if(itemID.indexOf(":") == -1)
+	{
+
+	    String itemID = args.getOne("id").get().toString();
+
+		if(itemID.indexOf((":")) == -1)
 			src.sendMessage(Text.of(TextColors.RED, "Incorrect format!"));
 		else
-		{ 
+		{
 			if(!Main.list.getList().contains(itemID))
 			{
 				Main.list.add(itemID);
@@ -29,8 +31,14 @@ public class Add implements CommandExecutor
 			else
 			{
 				src.sendMessage(Text.of(TextColors.RED,"This is already blacklisted!"));
-			} 
+			}
 		}
-		return CommandResult.success();
-	}
-} 
+
+
+        return CommandResult.success();
+    }
+
+
+
+
+}
