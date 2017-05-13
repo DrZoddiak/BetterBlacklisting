@@ -20,6 +20,9 @@ public class CommandLoader
     private CommandSpec list = CommandSpec.builder()
         .description(Text.of("Show banned items in a list")).executor(new BList()).permission(Reference.LIST_ITEM).build();
 
+    private CommandSpec identify = CommandSpec.builder()
+            .description(Text.of("Get item ID")).executor(new Identify()).permission(Reference.ID_ITEM).build();
+
     private CommandSpec reload = CommandSpec.builder()
             .description(Text.of("Reloads Plugin")).executor(new Reload()).permission(Reference.RELOAD_CONFIG).build();
 
@@ -30,6 +33,7 @@ public class CommandLoader
             .child(add, "add")
             .child(remove, "remove")
             .child(list, "list")
+            .child(identify, "identify")
             .child(reload, "reload")
             .build(); 
 }

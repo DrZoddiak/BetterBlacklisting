@@ -14,6 +14,7 @@ public class Reference
     public final static String ADD_ITEM = "bbl.admin.add";
     public final static String RELOAD_CONFIG = "bbl.admin.reload";
     public final static String BYPASS = "bbl.admin.bypass";
+    public final static String ID_ITEM = "bbl.admin.identify";
 
 //User permissions
     public final static String LIST_ITEM = "bbl.user.list";
