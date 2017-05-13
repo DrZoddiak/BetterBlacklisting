@@ -18,8 +18,8 @@ public class Add implements CommandExecutor
 	{
 
 	    String itemID = args.getOne("id").get().toString();
-
-		if(itemID.indexOf((":")) == -1)
+            //
+		if(!itemID.contains((":")))  //itemID.indexOf((":")) == -1)
 			src.sendMessage(Text.of(TextColors.RED, "Incorrect format!"));
 		else
 		{
