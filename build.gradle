@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.gmail.drzoddiak.betterblacklisting'
-version ='0.2.0'
+version ='0.2.1'
 description = 'Blacklisting Made possible, but better!'
 
 
