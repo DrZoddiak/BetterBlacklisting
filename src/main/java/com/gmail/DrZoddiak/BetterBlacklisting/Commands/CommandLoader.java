@@ -13,9 +13,15 @@ public class CommandLoader
         .description(Text.of("Adds item to banned item list")).executor(new Add()).arguments(GenericArguments.onlyOne(GenericArguments
         .string(Text.of("id")))).permission(Reference.ADD_ITEM).build();
 
+    private CommandSpec addHand = CommandSpec.builder()
+            .description(Text.of("Adds held item to banned item list")).executor(new Addhand()).permission(Reference.ADD_ITEM).build();
+    
     private CommandSpec remove = CommandSpec.builder()
         .description(Text.of("Removes item from banned item list")).executor(new Remove()).arguments(GenericArguments.onlyOne(GenericArguments
         .string(Text.of("id")))).permission(Reference.REMOVE_ITEM).build();
+    
+    private CommandSpec removeHand = CommandSpec.builder()
+            .description(Text.of("Removes held item from banned item list")).executor(new Removehand()).permission(Reference.REMOVE_ITEM).build();
 
     private CommandSpec list = CommandSpec.builder()
         .description(Text.of("Show banned items in a list")).executor(new BList()).permission(Reference.LIST_ITEM).build();
@@ -31,6 +37,8 @@ public class CommandLoader
     public CommandSpec bbl = CommandSpec.builder()
         .description(Text.of("Base command")).executor(new Help()).permission(Reference.HELP_BASE)
             .child(add, "add")
+            .child(addHand, "addhand")
+            .child(removeHand, "removehand")
             .child(remove, "remove")
             .child(list, "list")
             .child(identify, "identify")

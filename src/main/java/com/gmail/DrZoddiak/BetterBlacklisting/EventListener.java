@@ -1,6 +1,5 @@
 package com.gmail.DrZoddiak.BetterBlacklisting;
-
-import com.sun.org.apache.regexp.internal.RE;
+ 
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.filter.cause.First;
@@ -8,14 +7,13 @@ import org.spongepowered.api.event.item.inventory.ChangeInventoryEvent;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.event.item.inventory.*;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.type.*;
 import org.spongepowered.api.text.format.TextColors;
 
 
 public class EventListener 
-{
-//Hi there, I am as useful as a screen door on a submarine right now! but I do indeed promise to be useful soon... }
-
+{ 
 	//Removes items from players MAIN hand
 	public void removeMain(Player player)
 	{
@@ -26,20 +24,23 @@ public class EventListener
 	{
 		player.setItemInHand(HandTypes.OFF_HAND, null);
 	}
-
-
+ 
 	@Listener()
 	public void onPickUp(ChangeInventoryEvent.Pickup event, @First Player player)
 	{
-		ItemType item = event.getTargetEntity().getItemType();
+		String item;
+		if(event.getTargetEntity().supports(Keys.ITEM_BLOCKSTATE))
+			item = event.getTargetEntity().get(Keys.ITEM_BLOCKSTATE).get()+"";
+		else
+			item = event.getTargetEntity().getItemData()+"";
 		//if(!player.hasPermission(Reference.BYPASS)) //TODO Uncomment on production!
 		{
-			if (Main.list.getList().contains(item.getId()))
+			if (Main.list.getList().contains(item))
 			{
 				event.setCancelled(true);
 				event.getTargetEntity().remove();
 				//TODO debug message -Remove in production
-				System.out.println(item.getName());
+				System.out.println(item);
 				player.sendMessage(Text.of(TextColors.RED, "The item you currently are trying to pick up is banned"));
 
 			}
@@ -49,15 +50,19 @@ public class EventListener
 	@Listener()
 	public void onUsePriMain(InteractItemEvent.Primary.MainHand event, @First Player player)
 	{
-		ItemType item = event.getItemStack().getType();
+		String item;
+		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
+			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
+		else
+			item = event.getItemStack().getType().getId()+"";
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
-			if (Main.list.getList().contains(item.getId()))
+			if (Main.list.getList().contains(item))
 			{
 				event.setCancelled(true);
 				removeMain(player);
 				//debug message -Remove in production
-				System.out.println(item.getName());
+				System.out.println(item);
 				player.sendMessage(Text.of(TextColors.RED, "The item you currently are trying to use is banned"));
 			}
 		}
@@ -66,15 +71,19 @@ public class EventListener
 	@Listener()
 	public void onUseSecMain(InteractItemEvent.Secondary.MainHand event, @First Player player)
 	{
-		ItemType item = event.getItemStack().getType();
+		String item;
+		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
+			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
+		else
+			item = event.getItemStack().getType().getId()+"";
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
-			if (Main.list.getList().contains(item.getId()))
+			if (Main.list.getList().contains(item))
 			{
 				event.setCancelled(true);
 				removeMain(player);
 				//debug message -Remove in production
-				System.out.println(item.getName());
+				System.out.println(item);
 				player.sendMessage(Text.of(TextColors.RED, "The item you currently are trying to use is banned"));
 
 			}
@@ -85,15 +94,19 @@ public class EventListener
 	@Listener()
 	public void onUsePriOff(InteractItemEvent.Primary.OffHand event, @First Player player)
 	{
-		ItemType item = event.getItemStack().getType();
+		String item;
+		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
+			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
+		else
+			item = event.getItemStack().getType().getId()+"";
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
-			if (Main.list.getList().contains(item.getId()))
+			if (Main.list.getList().contains(item))
 			{
 				event.setCancelled(true);
 				removeOff(player);
 				//debug message -Remove in production
-				System.out.println(item.getName());
+				System.out.println(item);
 				player.sendMessage(Text.of(TextColors.RED, "The item you currently are trying to use is banned"));
 
 			}
@@ -103,24 +116,22 @@ public class EventListener
 	@Listener()
 	public void onUseSecOff(InteractItemEvent.Secondary.OffHand event, @First Player player)
 	{
-		ItemType item = event.getItemStack().getType();
+		String item;
+		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
+			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
+		else
+			item = event.getItemStack().getType().getId()+"";
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
-			if (Main.list.getList().contains(item.getId()))
+			if (Main.list.getList().contains(item))
 			{
 				event.setCancelled(true);
 				removeOff(player);
 				//debug message -Remove in production
-				System.out.println(item.getName());
+				System.out.println(item);
 				player.sendMessage(Text.of(TextColors.RED, "The item you currently are trying to use is banned"));
 
 			}
 		}
-	}
-
-
-
-
-	//Want to store a banned item? too bad!
-
+	}  
 } 
