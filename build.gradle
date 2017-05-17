@@ -1,6 +1,36 @@
+buildscript {
+    repositories {
+        maven {
+            name = 'forge'
+            url = 'http://files.minecraftforge.net/maven'
+        }
+    }
+
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+    }
+}
+
+
 plugins {
     id 'org.spongepowered.plugin' version '0.8.1'
+    id 'net.minecrell.vanillagradle.server' version '2.2-3'
 }
+defaultTasks 'clean', 'build'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+task createJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'BetterBlacklisting',
+                'Implementation-Version': version
+    }
+    baseName = project.name + version
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 
 group = 'com.gmail.drzoddiak.betterblacklisting'
 version ='0.2.1'
@@ -8,5 +38,10 @@ description = 'Blacklisting Made possible, but better!'
 
 
 dependencies {
-    compile 'org.spongepowered:spongeapi:6.0.0'
+    compile 'org.spongepowered:spongeapi:5.1.0'
+}
+
+minecraft {
+    version = '1.10.2'
+    mappings = 'snapshot_20160822'
 }
