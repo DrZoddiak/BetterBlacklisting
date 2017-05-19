@@ -64,7 +64,7 @@ public class Main
 	{
 		getLogger().info(String.format("%s - Version:%s - Initializing...",NAME,VERSION));
 
-		list = new BBlacklist(logger, config, defaultConfig, loader); 
+		list = new BBlacklist(config, defaultConfig, loader);
 	}
 
 	@Listener

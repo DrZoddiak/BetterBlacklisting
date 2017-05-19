@@ -19,7 +19,7 @@ public class BBlacklist
 	private Path defaultConfig;
 	private ConfigurationLoader<CommentedConfigurationNode> loader;
 
-	public BBlacklist(Logger logger, ConfigurationNode config, Path defaultConfig, ConfigurationLoader<CommentedConfigurationNode> loader) 
+	public BBlacklist(ConfigurationNode config, Path defaultConfig, ConfigurationLoader<CommentedConfigurationNode> loader)
 	{   
 			this.config = config;
 			this.defaultConfig = defaultConfig;

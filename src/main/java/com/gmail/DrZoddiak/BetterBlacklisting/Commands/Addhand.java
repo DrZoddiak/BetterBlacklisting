@@ -1,5 +1,7 @@
 package com.gmail.DrZoddiak.BetterBlacklisting.Commands;
 
+import net.minecraft.item.ItemBlock;
+import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
@@ -19,27 +21,34 @@ public class Addhand implements CommandExecutor
 	@Override
 	public CommandResult execute(CommandSource src, CommandContext args) throws CommandException
 	{
+	    String itemToBan;
+
 		if(src instanceof Player)
         {
             Player player = (Player) src;
             if(player.getItemInHand(HandTypes.MAIN_HAND).isPresent())
             {
-                ItemStack itemInHand =  player.getItemInHand(HandTypes.MAIN_HAND).get();
-                String itemID;
-                if(itemInHand.supports(Keys.ITEM_BLOCKSTATE))
-                	itemID = itemInHand.get(Keys.ITEM_BLOCKSTATE).get()+"";
+
+                ItemStack itemInHand = player.getItemInHand(HandTypes.MAIN_HAND).get();
+
+                if (itemInHand.getItem() instanceof ItemBlock)
+                {
+                    ItemBlock itemBlock = (ItemBlock) itemInHand.getItem();
+                    net.minecraft.item.ItemStack metadata = (net.minecraft.item.ItemStack) (Object) itemInHand;
+                    BlockState blockState = ((BlockState) itemBlock.getBlock().getStateFromMeta(metadata.getItemDamage()));
+                    itemToBan = blockState.getId();
+
+                    player.sendMessage(Text.of(itemToBan));
+
+                    addToConfig(itemToBan,player);
+                }
                 else
-                	itemID = itemInHand.getItem().getId();
-                
-                if(!Main.list.getList().contains(itemID))
-    			{
-    				Main.list.add(itemID);
-    				src.sendMessage(Text.of(TextColors.GREEN,"Successfully added ", TextColors.GRAY, itemID, TextColors.GREEN," to blacklist!"));
-    			}
-    			else
-    			{
-    				src.sendMessage(Text.of(TextColors.RED,"This is already blacklisted!"));
-    			} 
+                {
+                    itemToBan = itemInHand.getItem().getId();
+
+                    addToConfig(itemToBan,player);
+
+                }
             }
             else
                 src.sendMessage(Text.of(TextColors.RED, "Your Main hand has nothing in it!"));
@@ -51,4 +60,16 @@ public class Addhand implements CommandExecutor
 	     
     }
 
+    private void addToConfig(String itemToBan, Player player)
+    {
+        if(!Main.list.getList().contains(itemToBan))
+        {
+            Main.list.add(itemToBan);
+            player.sendMessage(Text.of(TextColors.GREEN,"Successfully added ", TextColors.GRAY, itemToBan, TextColors.GREEN," to blacklist!"));
+        }
+        else
+        {
+            player.sendMessage(Text.of(TextColors.RED,"This is already blacklisted!"));
+        }
+    }
 }

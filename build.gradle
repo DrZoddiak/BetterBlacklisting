@@ -18,23 +18,13 @@ plugins {
 }
 
 group = 'com.gmail.drzoddiak.betterblacklisting'
-version ='0.2.1'
+version ='0.4.0'
 description = 'Blacklisting Made possible, but better!'
 
 defaultTasks 'clean', 'build'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
-task createJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'BetterBlacklisting',
-                'Implementation-Version': version
-    }
-    baseName = project.name + version
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
     compile 'org.spongepowered:spongeapi:5.1.0'
