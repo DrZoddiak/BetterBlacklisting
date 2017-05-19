@@ -16,6 +16,11 @@ plugins {
     id 'org.spongepowered.plugin' version '0.8.1'
     id 'net.minecrell.vanillagradle.server' version '2.2-3'
 }
+
+group = 'com.gmail.drzoddiak.betterblacklisting'
+version ='0.2.1'
+description = 'Blacklisting Made possible, but better!'
+
 defaultTasks 'clean', 'build'
 
 sourceCompatibility = '1.8'
@@ -30,12 +35,6 @@ task createJar(type: Jar) {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
-
-
-group = 'com.gmail.drzoddiak.betterblacklisting'
-version ='0.2.1'
-description = 'Blacklisting Made possible, but better!'
-
 
 dependencies {
     compile 'org.spongepowered:spongeapi:5.1.0'
