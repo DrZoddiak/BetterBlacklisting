@@ -35,7 +35,7 @@ public class Addhand implements CommandExecutor
                 {
                     ItemBlock itemBlock = (ItemBlock) itemInHand.getItem();
                     net.minecraft.item.ItemStack metadata = (net.minecraft.item.ItemStack) (Object) itemInHand;
-                    BlockState blockState = ((BlockState) itemBlock.getBlock().getStateFromMeta(metadata.getItemDamage()));
+                    BlockState blockState = ((BlockState) itemBlock.getBlock().getStateFromMeta(metadata.getItemDamage())); 
                     itemToBan = blockState.getId();
 
                     player.sendMessage(Text.of(itemToBan));
@@ -44,8 +44,10 @@ public class Addhand implements CommandExecutor
                 }
                 else
                 {
+                	
                     itemToBan = itemInHand.getItem().getId();
-
+                    if(itemInHand.supports(Keys.DYE_COLOR)) 
+						itemToBan+="[color="+itemInHand.get(Keys.DYE_COLOR).get()+"]";
                     addToConfig(itemToBan,player);
 
                 }

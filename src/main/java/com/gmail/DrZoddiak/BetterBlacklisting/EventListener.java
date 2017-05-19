@@ -41,7 +41,12 @@ public class EventListener
         if(event.getTargetEntity().supports(Keys.ITEM_BLOCKSTATE))
             item = event.getTargetEntity().get(Keys.ITEM_BLOCKSTATE).get()+"";
         else
+        {
             item = event.getTargetEntity().getType().getId()+"";
+            if(event.getTargetEntity().supports(Keys.DYE_COLOR)) 
+				item+="[color="+event.getTargetEntity().get(Keys.DYE_COLOR).get()+"]";
+        }
+	        
 		//if(!player.hasPermission(Reference.BYPASS)) //TODO Uncomment on production!
 		{
 			if (Main.list.getList().contains(item))
@@ -60,7 +65,11 @@ public class EventListener
 		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
 			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
 		else
-			item = event.getItemStack().getType().getId()+"";
+        {
+            item = event.getItemStack().getType().getId()+"";
+            if(event.getItemStack().supports(Keys.DYE_COLOR)) 
+				item+="[color="+event.getItemStack().get(Keys.DYE_COLOR).get()+"]";
+        }
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
 			if (Main.list.getList().contains(item))
@@ -79,7 +88,11 @@ public class EventListener
 		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
 			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
 		else
-			item = event.getItemStack().getType().getId()+"";
+        {
+            item = event.getItemStack().getType().getId()+"";
+            if(event.getItemStack().supports(Keys.DYE_COLOR)) 
+				item+="[color="+event.getItemStack().get(Keys.DYE_COLOR).get()+"]";
+        }
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
 			if (Main.list.getList().contains(item))
@@ -100,7 +113,11 @@ public class EventListener
 		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
 			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
 		else
-			item = event.getItemStack().getType().getId()+"";
+        {
+            item = event.getItemStack().getType().getId()+"";
+            if(event.getItemStack().supports(Keys.DYE_COLOR)) 
+				item+="[color="+event.getItemStack().get(Keys.DYE_COLOR).get()+"]";
+        }
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
 			if (Main.list.getList().contains(item))
@@ -120,7 +137,11 @@ public class EventListener
 		if(event.getItemStack().supports(Keys.ITEM_BLOCKSTATE))
 			item = event.getItemStack().get(Keys.ITEM_BLOCKSTATE).get()+"";
 		else
-			item = event.getItemStack().getType().getId()+"";
+        {
+            item = event.getItemStack().getType().getId()+"";
+            if(event.getItemStack().supports(Keys.DYE_COLOR)) 
+				item+="[color="+event.getItemStack().get(Keys.DYE_COLOR).get()+"]";
+        }
 		//if(!player.hasPermission(Reference.BYPASS))
 		{
 			if (Main.list.getList().contains(item))

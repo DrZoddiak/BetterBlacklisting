@@ -3,6 +3,7 @@ package com.gmail.DrZoddiak.BetterBlacklisting.Commands;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.spec.CommandExecutor;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.type.HandTypes;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.ItemStack;
@@ -48,6 +49,8 @@ public class Identify implements CommandExecutor
                 else
                 {
                     identity = itemInHand.getItem().getId();
+                    if(itemInHand.supports(Keys.DYE_COLOR)) 
+						identity+="[color="+itemInHand.get(Keys.DYE_COLOR).get()+"]";
                     player.sendMessage(Text.of(identity));
                 }
             }
